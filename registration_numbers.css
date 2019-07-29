@@ -1,19 +1,20 @@
-.plate {
+li{
   border-radius: 25px;
   border: solid black;
   background:yellow;
-  padding: 20px; 
-  width: 200px;
-  height: 50px;  
+  padding: 10px; 
+  width: 90px;
+  height: 20px;
+  font-size: 20px;  
   
 }
   h1{
+    font-style: oblique;
+    font-size: 50px;
     text-align: center;
   }
-  .plate{
-    margin: auto;
-  width: 30%;
-  border: 3px solid black;
-  padding: 10px;
-  font-size: 30px;
-  }
+ ul{
+ 
+    list-style-type:none;
+    }
+ 

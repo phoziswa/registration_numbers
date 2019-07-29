@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,15 +8,62 @@
     <title>Document</title>
     <link rel="stylesheet" href="registration_numbers.css">
 
-    <h1>registration numbers</h1>
+    <h1>registration number list</h1>
 </head>
+
 <body>
-    <div>
-            <br>
-            <br>
+
+    <br>
+    <br>
+
+    <div class="row">
+        <div class="col-12">
+
+            <span>
+                <h4> registration Numbers:
+            </span>
+            <span>
+                    <input name="name" rows="20" cols="40" class="textArea" class="textArea" ></input>
+                
+              <button class="button-primary addButton" type="button" name="button" >Add</button></h4>
+            </span>
+
+        </div>
     </div>
-    <div class="plate "> 
-       CA 12345 
+
+    <br>
+    <br>
+
+    <!-- <div class="row">
+        <div class="col-12">
+            <div class="radio">
+                <span>
+                    <span> <input type="radio" name="btn" class="townButton" value="English">Cape town</span>
+
+                    <span> <input type="radio" name="btn" class="townButton" value="isiXhosa">Gauteng</span>
+
+                    <span> <input type="radio" name="btn" class="townButton" value="Afrikaans">Bellville</span>
+
+                    <span><input class="showBtn" type="button" value="show"></span>
+                </span>
+            </div>
+        </div>
+    </div> -->
+
+    <br>
+    <br>
+
+    <div class="row">
+        <div class="col-12">
+            <ul id="ulList" >
+            
+            </ul>
+        </div>
     </div>
+    <script src="registration_numbers.js" charset="utf-8"></script>
+    <script src="registration_numbers-dom.js" charset="utf-8"></script>
+
+
 </body>
+
 </html>
