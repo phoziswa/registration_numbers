@@ -1,11 +1,11 @@
 function RegNumbersFactory() {
     var list = [];
     let getter;
-    // var capeTown = []
-    // var gauteng = []
-    // var bellville = []
 
     function addingRegsToList(reg) {
+        if(!reg){
+            return "First enter the registration number"
+        }
         getter = reg;
         list.push(reg)
     }
@@ -14,47 +14,40 @@ function RegNumbersFactory() {
         return list;
     }
 
-    function showCity(){
+    function showCity() {
         return getter;
     }
-  console.log(list);
-    
-    
-    
-    // function regList(){
-    //     if(!reg)
-    //         return("no reg entered")
-    //     }
+    // console.log(list);
 
+    function registrationNums(townTag) {
 
-// function registrationNums(){
-//     var regs = list.Split(",");
-//     for(i=0; i<list.length; i++)
-//     list.push(regs)
-// }
-    // function town1(regNum) {
-    //     if (list.StartsWith("CA")) {
-    //         capeTown.push(regNum)
+        var cityRegs = []  
+        if(townTag ==="" || townTag === undefined)return list;
 
-    //     }
-    // }
-    // function town2(list) {
-    //     if (list.EndsWith("GP")) {
-    //         gauteng.push(regNum)
+        for (var i = 0; i < list.length; i++) {
 
-    //     }
-    // }
-    // function town3(list) {
-    //     if (list.EndsWith("CY")) {
-    //         bellville.push(regNum)
-    //     }
-    // }
+            if (list[i].startsWith(townTag)) {
+
+                cityRegs.push(list[i])
+            }
+
+            // else if (list[i].startsWith("GP")) {
+            //     cityRegs.push(list[i])
+            // }
+
+            // else if (list[i].startsWith("CY")) {
+            //     cityRegs.push(list[i])
+
+            // }
+        }
+        return cityRegs
+    }
 
     return {
         addingRegsToList,
         getReg,
         showCity,
-        // registrationNums
+        registrationNums
 
     }
 }

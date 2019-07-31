@@ -1,9 +1,16 @@
+body{
+  background-color: aqua;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
 li{
   border-radius: 25px;
   border: solid black;
   background:yellow;
   padding: 10px; 
-  width: 90px;
+  width: 110px;
   height: 20px;
   font-size: 20px;  
   
