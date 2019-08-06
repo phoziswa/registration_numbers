@@ -8,9 +8,12 @@ body{
 li{
   border-radius: 25px;
   border: solid black;
+  margin-bottom: 0.5em;
+  display: block;
   background:yellow;
   padding: 10px; 
-  width: 110px;
+  width: 105px;
+  text-align: center;
   height: 20px;
   font-size: 20px;  
   
