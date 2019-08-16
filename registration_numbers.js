@@ -1,48 +1,56 @@
-function RegNumbersFactory() {
-    var list = [];
+function RegNumbersFactory(regPlate) {
+    var list = regPlate;
+    var cityRegs = regPlate || [];
+    var error = ""
 
     function addingRegsToList(reg) {
-
-        let toUpper = reg.toUpperCase()
-        if (!list.includes(toUpper)){
-            list.push(toUpper)
+        error = "";
+        if (reg === "") {
+            error = "First enter the registration number"
+           
         }
-        
+        let toUpper = reg.toUpperCase();
+        let regex = /[A-Z]{2}\s[0-9]{5}$/gm;
+        let testRegex = regex.test(toUpper)
+        console.log(testRegex)
+        if (testRegex) {
+            cityRegs.push(toUpper);
+        }
+        return testRegex;
     }
-    function errorMessages() {
-        if (regNumbers == "") {
-            return "first enter a registration number!"
-        }
+
+    function regExist(plate) {
+        return cityRegs.includes(plate)
+    }
+
+    function getError() {
+        return error;
     }
 
     function getReg() {
-        return list;
+        return cityRegs;
     }
+console.log(cityRegs);
 
     function registrationNums(townTag) {
-
-        var cityRegs = []
-        if (townTag === "" || townTag === undefined) return list;
-
-        for (var i = 0; i < list.length; i++) {
-
-            if (list[i].startsWith(townTag)) {
-
-                cityRegs.push(list[i])
-            }
-
-        
+        var townsList = [];
+        if (townTag === "" || townTag === undefined) {
+            return list;
         }
-        return cityRegs
+        for (var i = 0; i < cityRegs.length; i++) {
+            if (cityRegs[i].startsWith(townTag)) {
+                townsList.push(cityRegs[i])
+            }
+        }
+        return townsList;
     }
 
     return {
         addingRegsToList,
-        errorMessages,
+        getError,
         getReg,
-        // showCity,
         registrationNums,
-
+        regExist
 
     }
 }
