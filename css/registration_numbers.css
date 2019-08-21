@@ -36,12 +36,6 @@ body{
     font-style: italic;
 
   }
-  /* .reset{
-    justify-content: center;
-    display: flex;
-  } */
- /* ul{
- 
-    list-style-type:none;
-    }
-  */
+  .col-6{
+    float: left;
+  }

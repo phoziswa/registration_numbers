@@ -13,7 +13,7 @@ if (localStorage["Regs"]) {
 } else {
     store = [];
 }
-console.log(store);
+// console.log(store);
 
 var instance = RegNumbersFactory(store);
 
