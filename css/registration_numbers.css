@@ -14,7 +14,7 @@ body{
   background:yellow;
   padding: 10px; 
   width: 105px;
-  /* text-align: center; */
+  text-align: center;
   height: 20px;
   font-size: 20px;  
   
@@ -38,4 +38,11 @@ body{
   }
   .col-6{
     float: left;
+  }
+  .errorMessage{
+    font-size: 20px; 
+    margin-left: 2em;
+    color: orangered;
+    font-style: italic;
+
   }

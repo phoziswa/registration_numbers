@@ -1,30 +1,44 @@
-var textAreaElement = document.querySelector(".textInput");
+var textIputElement = document.querySelector(".textInput");
 var townButtonElement = document.querySelector(".cityButton");
 var addButtonElement = document.querySelector(".addBtn");
 var showBtnElement = document.querySelector(".showButton");
-var clearBtnElement = document.querySelector(".clearButton");
-var errorElement = document.querySelector(".errorMessage");
-var displayElement = document.querySelector(".regContainer");
+var resetButtonElement = document.querySelector(".resetButton");
+var errorMessageElement = document.querySelector(".errorMessage");
+var displayAreaElement = document.querySelector(".regPlateContainer");
 
+var registrationElement = document.querySelector(".theRegList");
+var regTemplateSources = document.querySelector(".regTemplate").innerHTML;
+var registrationTemplates = Handlebars.compile(regTemplateSources);
 
-var billDataElement = document.querySelector(".radioBillData");
-var templateSources = document.querySelector(".billTemplate").innerHTML;
-var billTemplates = Handlebars.compile(templateSources);
-
-let store;
-if (localStorage["Regs"]) {
-    store = JSON.parse(localStorage["Regs"])
+let stored;
+if (localStorage["RegList2"]) {
+    stored = JSON.parse(localStorage["RegList2"])
 } else {
-    store = [];
+    stored = [];
 }
+var regNum = RegNumbersFactory(stored);
 
-var regNum = RegNumbersFactory(store);
+function addReg() {
+    if (textIputElement.value !== "") {
+        var regCap = textIputElement.value.toUpperCase();
+        if (regNum.regExist(regCap)) {
+            errorMessageElement.innerHTML = "please enter the new registration number, this one exist"
+        }
+        regNum.regExist(textIputElement.value)
+        var contain = regNum.getReg()
+      
+        var data = registrationTemplates({ regTemp: contain })
+        
+        displayAreaElement.innerHTML = data;
 
-function addReg(){
-    var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked");
-if (checkedRadioBtn){
-    var billItemType = checkedRadioBtn.value
-}
-
+        localStorage["RegList2"] = JSON.stringify(regNum.getReg());
+    }
 }
 addButtonElement.addEventListener('click', addReg);
+
+function reset() {
+    localStorage.clear();
+    location.reload();
+}
+resetButtonElement.addEventListener('click', reset);
+

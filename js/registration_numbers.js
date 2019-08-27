@@ -4,15 +4,11 @@ function RegNumbersFactory(regPlate) {
     var error = ""
 
     function addingRegsToList(reg) {
-        error = "";
-        if (reg === "") {
-            error = "First enter the registration number"
-           
-        }
+     
         let toUpper = reg.toUpperCase();
         let regex = /[A-Z]{2}\s[0-9]{5}$/gm;
         let testRegex = regex.test(toUpper)
-        console.log(testRegex)
+      
         if (testRegex) {
             cityRegs.push(toUpper);
         }
@@ -30,7 +26,6 @@ function RegNumbersFactory(regPlate) {
     function getReg() {
         return cityRegs;
     }
-console.log(cityRegs);
 
     function registrationNums(townTag) {
         var townsList = [];

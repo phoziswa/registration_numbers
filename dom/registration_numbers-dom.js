@@ -8,8 +8,8 @@ var displayElement = document.querySelector(".regContainer");
 
 
 let store;
-if (localStorage["Regs"]) {
-    store = JSON.parse(localStorage["Regs"])
+if (localStorage["RegList1"]) {
+    store = JSON.parse(localStorage["RegList1"])
 } else {
     store = [];
 }
@@ -25,8 +25,8 @@ function addingBtn() {
             return;
         }
         var result = instance.addingRegsToList(regNumbersCap)
-        if (result) {     //in here I am saying if result is true must print as bellow
-            localStorage["Regs"] = JSON.stringify(instance.getReg());
+        if (result) {    
+            localStorage["RegList1"] = JSON.stringify(instance.getReg());
             var div = document.createElement("div")
             div.classList.add("plates")
             var content = document.createTextNode(regNumbersCap)
