@@ -64,7 +64,7 @@ showBtnElement.addEventListener('click', function () {
 
         displayElement.appendChild(div)
     }
-});
+}); errorElement.innerHTML = ''
 
 window.addEventListener("load", function () {
     var elements = document.querySelectorAll('[name=btn]:first-child');
