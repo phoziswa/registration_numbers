@@ -23,40 +23,66 @@ function addReg() {
         var regCap = textIputElement.value.toUpperCase();
         if (regNum.regExist(regCap)) {
             errorMessageElement.innerHTML = "please enter the new registration number, this one exist"
-            return;    
-        }
-        
-        regNum.addingRegsToList(regCap)
-        var contain = regNum.getReg()
-        var data = registrationTemplates({ regTemp: contain })
-        
-        displayAreaElement.innerHTML = data;
-
-        localStorage["RegList2"] = JSON.stringify(regNum.getReg());
-      
-        errorMessageElement.innerHTML = ''
+            return;         
+        } 
+    } else {
+        errorMessageElement.innerHTML = "Please enter a registration number"
     }
-
+        var results = regNum.addingRegsToList(regCap)
+        if(results){
+            localStorage["RegList2"] = JSON.stringify(regNum.getReg());
+            var contain = regNum.getReg()
+            var data = registrationTemplates({ regTemp: contain })      
+            displayAreaElement.innerHTML = data;   
+            errorMessageElement.innerHTML = ''  
+            
+        } else {
+            errorMessageElement = 'please add a valid registration number i.e CA 123 456';
+        }
 }
 addButtonElement.addEventListener('click', addReg);
 
 showButtonElement.addEventListener('click', function () {
-
-    var checkedRadioButton = document.querySelector("input[name='button']:checked");
-    
-    var city = checkedRadioButton.value;
     displayAreaElement.innerHTML = ""
 
-    var regPlate = instance.registrationNums(city);
+    var checkedRadioButton = document.querySelector("input[name='button']:checked");
+    var city = checkedRadioButton.value;
+    var regPlate = regNum.registrationNums(city);
 
     for (let i = 0; i < regPlate.length; i++) {
-      
+        var elementTemp = regPlate[i];
+         elementTemp = regNum.registrationNums(city)
+        var data = registrationTemplates({ regTemp: elementTemp })
+        
+        displayAreaElement.innerHTML = data;
+
     }
-}); errorElement.innerHTML = ''
 
-function reset() {
-    localStorage.clear();
-    location.reload();
+});
+
+window.addEventListener("load", function () {
+    var radioBtn = document.querySelectorAll('[name=button]:first-child');
+   
+    var typeTemp = radioBtn.value;
+    displayAreaElement.innerHTML = ""
+
+    var regNumber = regNum.registrationNums(typeTemp);
+
+    for (let i = 0; i <  regNumber.length; i++) {
+        var elementTemp =  regNumber[i];
+         elementTemp = regNum.registrationNums(typeTemp)
+        var data = registrationTemplates({ regTemp: elementTemp })
+        
+        displayAreaElement.innerHTML = data;
+
+    }errorElement.innerHTML = ''
+})
+
+
+function clearStorage() {
+    localStorage.removeItem("RegList2");
+    regNum.clearLocalStorage();
+    displayAreaElement.innerHTML = ""
+ 
 }
-resetButtonElement.addEventListener('click', reset);
-
+resetButtonElement.addEventListener('click', clearStorage);

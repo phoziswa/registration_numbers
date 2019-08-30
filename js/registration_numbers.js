@@ -5,9 +5,9 @@ function RegNumbersFactory(regPlate) {
 
     function addingRegsToList(reg) {
      
-        let toUpper = reg.toUpperCase();
-        let regex = /[A-Z]{2}\s[0-9]{5}$/gm;
-        let testRegex = regex.test(toUpper)
+        var toUpper = reg.toUpperCase();
+        var regex = /([A-Z]){2}\s+([0-9]){3}\s([0-9]){3}/g; 
+        var testRegex = regex.test(toUpper);
       
         if (testRegex) {
             cityRegs.push(toUpper);
@@ -39,13 +39,17 @@ function RegNumbersFactory(regPlate) {
         }
         return townsList;
     }
+    function  clearLocalStorage(){
+        cityRegs = []
+    }
 
     return {
         addingRegsToList,
         getError,
         getReg,
         registrationNums,
-        regExist
+        regExist,
+        clearLocalStorage
 
     }
 }

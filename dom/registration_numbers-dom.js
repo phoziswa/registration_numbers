@@ -17,6 +17,9 @@ if (localStorage["RegList1"]) {
 
 var instance = RegNumbersFactory(store);
 
+// load all reg numbers...
+
+
 function addingBtn() {
     if (textAreaElement.value !== "") {
         var regNumbersCap = textAreaElement.value.toUpperCase();
@@ -34,7 +37,7 @@ function addingBtn() {
             displayElement.appendChild(div)
             errorElement.innerHTML = ''
         } else {
-            errorElement.innerHTML = 'please add a valid registration number i.e CA 12345';
+            errorElement.innerHTML = 'please add a valid registration number i.e CA 123 456';
         }
 
     } else {
@@ -86,8 +89,10 @@ window.addEventListener("load", function () {
 })
 
 function clear() {
-    localStorage.clear();
-    location.reload();
+    localStorage.removeItem("RegList1");
+    instance.clearLocalStorage();
+    displayElement.innerHTML = ""
+    // location.reload();
 }
 clearBtnElement.addEventListener('click', clear);
 
