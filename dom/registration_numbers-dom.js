@@ -24,11 +24,12 @@ function addingBtn() {
     if (textAreaElement.value !== "") {
         var regNumbersCap = textAreaElement.value.toUpperCase();
         if (instance.regExist(regNumbersCap)) {
-            errorElement.innerHTML = "please enter the new registration number, this one exist"
+            errorElement.innerHTML = "please enter the new registration number, this one exists"
             return;
         }
+
         var result = instance.addingRegsToList(regNumbersCap)
-        if (result) {    
+        if (result) {
             localStorage["RegList1"] = JSON.stringify(instance.getReg());
             var div = document.createElement("div")
             div.classList.add("plates")
@@ -37,14 +38,14 @@ function addingBtn() {
             displayElement.appendChild(div)
             errorElement.innerHTML = ''
         } else {
-            errorElement.innerHTML = 'please add a valid registration number i.e CA 123 456';
+            errorElement.innerHTML = 'please add a valid registration number, a valid registration numbers starts with CA, CX and CY';
         }
 
     } else {
         errorElement.innerHTML = "Please enter a registration number"
     }
-    
-    }
+
+}
 
 addButtonElement.addEventListener('click', addingBtn);
 
@@ -52,7 +53,7 @@ addButtonElement.addEventListener('click', addingBtn);
 showBtnElement.addEventListener('click', function () {
 
     var checkedRadioBtn = document.querySelector("input[name='btn']:checked");
-    
+
     var type = checkedRadioBtn.value;
     displayElement.innerHTML = ""
 
@@ -71,7 +72,7 @@ showBtnElement.addEventListener('click', function () {
 
 window.addEventListener("load", function () {
     var elements = document.querySelectorAll('[name=btn]:first-child');
-   
+
     var type = elements.value;
     displayElement.innerHTML = ""
 

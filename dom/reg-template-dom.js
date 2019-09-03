@@ -19,26 +19,31 @@ if (localStorage["RegList2"]) {
 var regNum = RegNumbersFactory(stored);
 
 function addReg() {
+
+    var regCap = textIputElement.value.toUpperCase();
     if (textIputElement.value !== "") {
-        var regCap = textIputElement.value.toUpperCase();
+
         if (regNum.regExist(regCap)) {
-            errorMessageElement.innerHTML = "please enter the new registration number, this one exist"
-            return;         
-        } 
+            errorMessageElement.innerHTML = "please enter the new registration number, this one exists"
+            return;
+        }
+
     } else {
         errorMessageElement.innerHTML = "Please enter a registration number"
+        return
     }
-        var results = regNum.addingRegsToList(regCap)
-        if(results){
-            localStorage["RegList2"] = JSON.stringify(regNum.getReg());
-            var contain = regNum.getReg()
-            var data = registrationTemplates({ regTemp: contain })      
-            displayAreaElement.innerHTML = data;   
-            errorMessageElement.innerHTML = ''  
-            
-        } else {
-            errorMessageElement = 'please add a valid registration number i.e CA 123 456';
-        }
+    var results = regNum.addingRegsToList(regCap);
+
+    if (results) {
+        localStorage["RegList2"] = JSON.stringify(regNum.getReg());
+        var contain = regNum.getReg()
+        var data = registrationTemplates({ regTemp: contain })
+        displayAreaElement.innerHTML = data;
+        errorMessageElement.innerHTML = ''
+    }
+    else {
+        errorMessageElement.innerHTML = 'please add a valid registration number, a valid registration numbers starts with CA, CX and CY';
+    }
 }
 addButtonElement.addEventListener('click', addReg);
 
@@ -51,9 +56,9 @@ showButtonElement.addEventListener('click', function () {
 
     for (let i = 0; i < regPlate.length; i++) {
         var elementTemp = regPlate[i];
-         elementTemp = regNum.registrationNums(city)
+        elementTemp = regNum.registrationNums(city)
         var data = registrationTemplates({ regTemp: elementTemp })
-        
+
         displayAreaElement.innerHTML = data;
 
     }
@@ -62,20 +67,20 @@ showButtonElement.addEventListener('click', function () {
 
 window.addEventListener("load", function () {
     var radioBtn = document.querySelectorAll('[name=button]:first-child');
-   
+
     var typeTemp = radioBtn.value;
     displayAreaElement.innerHTML = ""
 
     var regNumber = regNum.registrationNums(typeTemp);
 
-    for (let i = 0; i <  regNumber.length; i++) {
-        var elementTemp =  regNumber[i];
-         elementTemp = regNum.registrationNums(typeTemp)
+    for (let i = 0; i < regNumber.length; i++) {
+        var elementTemp = regNumber[i];
+        elementTemp = regNum.registrationNums(typeTemp)
         var data = registrationTemplates({ regTemp: elementTemp })
-        
+
         displayAreaElement.innerHTML = data;
 
-    }errorElement.innerHTML = ''
+    } errorElement.innerHTML = ''
 })
 
 
@@ -83,6 +88,6 @@ function clearStorage() {
     localStorage.removeItem("RegList2");
     regNum.clearLocalStorage();
     displayAreaElement.innerHTML = ""
- 
+
 }
 resetButtonElement.addEventListener('click', clearStorage);

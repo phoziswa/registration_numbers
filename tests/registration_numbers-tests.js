@@ -81,4 +81,4 @@ describe('regex function', function () {
     it('should return false if the registration number entered in the text box is incorrect',function () {
         assert.equal(regex.test('CAW 12340006'), false)
     })
-})
+});

@@ -1,35 +1,34 @@
 function RegNumbersFactory(regPlate) {
     var list = regPlate;
     var cityRegs = regPlate || [];
-    var error = ""
+  
 
     function addingRegsToList(reg) {
-     
-        var toUpper = reg.toUpperCase();
-        var regex = /([A-Z]){2}\s+([0-9]){3}\s([0-9]){3}/g; 
-        var testRegex = regex.test(toUpper);
-      
-        if (testRegex) {
-            cityRegs.push(toUpper);
+        let tag = reg.toUpperCase().split(' ')[0];
+        if (validation(tag)) {
+            if (regExCheck(reg)) {
+                cityRegs.push(reg.toUpperCase());
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
         }
-        return testRegex;
-    }
+    };
 
     function regExist(plate) {
         return cityRegs.includes(plate)
-    }
-
-    function getError() {
-        return error;
-    }
+    };
 
     function getReg() {
         return cityRegs;
-    }
+    };
 
     function registrationNums(townTag) {
         var townsList = [];
-        if (townTag === "" || townTag === undefined) {
+
+        if (townTag === "" || townTag === undefined || townTag === false) {
             return list;
         }
         for (var i = 0; i < cityRegs.length; i++) {
@@ -38,17 +37,50 @@ function RegNumbersFactory(regPlate) {
             }
         }
         return townsList;
+    };
+
+    function validation(tag) {
+        var validNums = ["CA", "CY", "CX"];
+        for (let index = 0; index < validNums.length; index++) {
+            const element = validNums[index];
+            if (element == tag) {
+                return true
+            }
+        }
+        return false
+    };
+
+    function regExCheck(plate) {
+        
+        var toUpper = plate.toUpperCase();
+        
+        var regex = /([A-Z]){2}\s+([0-9]){3}\S([0-9]){3}/g;
+        var regex2 = /([A-Z]){2}\s+([0-9]){5}/g;
+
+        var testRegex = regex.test(toUpper);
+        var testRegex2 = regex2.test(toUpper)
+
+        if (testRegex) {
+            return testRegex;
+        }
+        if (testRegex2) {
+            return testRegex2;
+        }
+        return false;
     }
-    function  clearLocalStorage(){
+
+
+
+    function clearLocalStorage() {
         cityRegs = []
     }
 
     return {
         addingRegsToList,
-        getError,
         getReg,
         registrationNums,
         regExist,
+        validation,
         clearLocalStorage
 
     }
